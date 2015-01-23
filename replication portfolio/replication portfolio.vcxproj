@@ -79,10 +79,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="yoyo.cpp" />
+    <ClCompile Include="Portfolio.cpp" />
+    <ClCompile Include="greeks.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="yoyo.h" />
+    <ClInclude Include="Portfolio.h" />
+    <ClInclude Include="greeks.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
