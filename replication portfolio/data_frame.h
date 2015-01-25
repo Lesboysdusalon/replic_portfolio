@@ -11,6 +11,7 @@ public:
 	vector < string > label;
 	vector < vector<float> > data;
 	data_frame(vector<string>,vector<vector<float> >);
+	data_frame();
 	~data_frame();
 	vector<float> getnav(string);
 };

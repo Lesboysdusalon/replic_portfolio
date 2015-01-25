@@ -20,6 +20,11 @@ data_frame::data_frame(vector<string> s, vector<vector<float> > v)
 	data = v;
 }
 
+data_frame::data_frame()
+{
+
+}
+
 
 data_frame::~data_frame()
 {
