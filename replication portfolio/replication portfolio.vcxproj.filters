@@ -24,12 +24,24 @@
     <ClCompile Include="greeks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="underlyings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="data_frame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Portfolio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="greeks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="underlyings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data_frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

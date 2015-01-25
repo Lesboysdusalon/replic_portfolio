@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>;
-#include <iostream>;
+#include <vector>
+#include <iostream>
 using namespace std;
 
 vector<vector<float> > calculate_delta(vector<float>, vector<string>);

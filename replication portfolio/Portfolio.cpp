@@ -1,4 +1,4 @@
-#include "Portfolio.h";
+#include "Portfolio.h"
 using namespace std;
 
 Portfolio::Portfolio(vector<float> a, vector<string> b, int c)

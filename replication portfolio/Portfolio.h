@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>;
-#include <iostream>;
-#include "greeks.h";
+#include <vector>
+#include <iostream>
+#include "greeks.h"
 using namespace std;
 
 class Portfolio

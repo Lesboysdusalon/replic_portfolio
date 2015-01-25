@@ -78,13 +78,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="data_frame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Portfolio.cpp" />
     <ClCompile Include="greeks.cpp" />
+    <ClCompile Include="underlyings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="data_frame.h" />
     <ClInclude Include="Portfolio.h" />
     <ClInclude Include="greeks.h" />
+    <ClInclude Include="underlyings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
