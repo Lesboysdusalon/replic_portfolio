@@ -2,7 +2,9 @@
 #include <algorithm>
 using namespace std;
 
-int search_st(vector<string> l, string s)  /*Donne le dernier indice trouvé, utilisé uniquement sur des vecteurs avec tout les éléments differents*/
+// Détermine le dernier indice trouvé
+// Fonctionne uniquement sur des vecteurs ayant tous leurs éléments differents
+int search_st(vector<string> l, string s)  
 {
 	int	k = 0;
 	for (int i = 0; i < l.size(); i++){

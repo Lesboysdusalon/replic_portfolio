@@ -4,6 +4,7 @@
 #include "greeks.h"
 using namespace std;
 
+// La classe portefeuille se caractérise par sa nav et les grecs classiques
 class Portfolio
 {
 public:
