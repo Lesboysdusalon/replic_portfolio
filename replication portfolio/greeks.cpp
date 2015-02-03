@@ -1,36 +1,56 @@
 #include "greeks.h"
 #include "underlyings.h"
 
-const vector<float> vect_0;
-const vector<vector<float> > vect_00;
+const deque<float> vect_0;
+const deque<deque<float> > vect_00;
 
-
-vector<vector<float> > calculate_delta(vector<float> nav, vector<string> ul)
+// On approxime la dérivée par un taux d'accroissement
+// par convention, on prend la première valeur nulle, 
+// cela ne pose pas de problème dans la régression grâce au grand nombre de données
+deque<float> calculate_delta(deque<float> nav, string ul)
 {
-	/* for (int i = 0; i < ul.size(); i++)
+	deque<float> delta;
+	delta[0] = 0; 
+	for (int i = 1; i < nav.size(); i++)
 	{
-		string s = ul[i];
-		vector<float> nav = ::underlying.getnav(s);
-	}*/
-	return vect_00;
+		delta[i]=(nav[i]-nav[i-1])/(ul[i]-ul[i-1]);
+	}
+	return delta;
 }
 
-vector<vector<float> > calculate_gamma(vector<float> nav, vector<string> ul)
+deque<float> calculate_gamma(deque<float> nav, string ul)
 {
-	return vect_00;
+	deque<float> gamma;
+	deque<float> delta = calculate_delta(nav, ul);
+	gamma[0] = 0;
+	gamma[1] = 0;
+	for (int i = 2; i < nav.size(); i++)
+	{
+		gamma[i] = (delta[i] - delta[i - 1]) / (ul[i] - ul[i - 1]);
+	}
+	return gamma;
 }
 
-vector<vector<float> > calculate_vega(vector<float> nav, vector<string> ul)
+deque<float> calculate_vega(deque<float> nav, string ul)
 {
-	return vect_00;
+	/*deque<float> vega;
+	deque<float> vol;
+
+	vega[0] = 0;
+	for (int i = 1; i < nav.size(); i++)
+	{
+		vega[i] = (nav[i] - nav[i - 1]) / (vol[i] - vol[i - 1]);
+	}
+	return vega;*/
+	return vect_0;
 }
 
-vector<float> calculate_rho(vector<float> nav)
+deque<float> calculate_rho(deque<float> nav)
 {
 	return vect_0;
 }
 
-vector<float> calculate_theta(vector<float>, int maturity)
+deque<float> calculate_theta(deque<float>, int maturity)
 {
 	return vect_0;
 }
