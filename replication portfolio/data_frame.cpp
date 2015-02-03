@@ -21,11 +21,11 @@ data_frame::data_frame(deque<string> s, deque<deque<float> > v)
 	_data = v;
 }
 
-data_frame::data_frame(deque<string> s)
+data_frame::data_frame(deque<string> s, string filename)
 {
 	_label = s;
 	data_t csv_data;  
-	csv_data.import_data();
+	csv_data.load(filename);
 	_data = csv_data;
 }
 
@@ -50,4 +50,5 @@ deque<float> data_frame::getnav(string s)
 
 // Pour cet exemple, on importe juste les quotations mensuelles du cac 40, de Jan 2000 à Dec 2014
 deque<string> s;
-data_frame data(s);
+string filename; //  = "..\nav.csv"
+data_frame data(s,filename);

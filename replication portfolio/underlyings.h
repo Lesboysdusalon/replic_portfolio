@@ -15,6 +15,5 @@ struct data_t : deque <deque <float> >
 	bool load(const string&);
 	bool save(const string&);
 	bool save(ostream&);
-	void import_data();
 };
 

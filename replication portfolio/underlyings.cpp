@@ -50,15 +50,3 @@ bool data_t::save(ostream& outs)
 	return outs.good();
 }
 
-
-// La fonction import_data permet de lancer l'importation du fichier via un invité de commande demandant de spécifier le chemin d'accès.
-
-void data_t::import_data()
-{
-	string filename;
-	cout << "File to read> ";
-	getline(cin, filename);
-	this -> load(filename);  // L'usage de "this" permet d'appliquer une méthode à l'objet de type data_t auquel la méthode import_data sera appliquée.
-	cout << "The data is:\n";
-	this -> save(cout);
-}
