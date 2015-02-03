@@ -1,17 +1,16 @@
 #include "Portfolio.h"
 using namespace std;
 
-Portfolio::Portfolio(vector<float> a, vector<string> b, int c)
+Portfolio::Portfolio(vector<float> nav, vector<string> ul, int maturity)
 {
-	nav = a;
-	ul = b;
-	maturity = c;
-
-	delta = calculate_delta(nav, ul);
-	gamma = calculate_gamma(nav, ul);
-	vega = calculate_vega(nav, ul);
-	rho = calculate_rho(nav);
-	theta = calculate_theta(nav, c);
+	_nav = nav;
+	_ul = ul;
+	_maturity = maturity;
+	_delta = calculate_delta(nav, ul);
+	_gamma = calculate_gamma(nav, ul);
+	_vega = calculate_vega(nav, ul);
+	_rho = calculate_rho(nav);
+	_theta = calculate_theta(nav, maturity);
 }
 
 Portfolio::Portfolio()

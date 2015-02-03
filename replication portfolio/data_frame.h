@@ -1,6 +1,8 @@
 #pragma once
-#include <vector>
+#include <deque>
 #include <iostream>
+#include <algorithm>
+#include "underlyings.h"
 using namespace std;
 
 // Définition de la classe Data Frame, de la même façon que sur R, 
@@ -9,12 +11,14 @@ using namespace std;
 class data_frame
 {
 public:
-	vector < string > label;
-	vector < vector<float> > data;
-	data_frame(vector<string>,vector<vector<float> >);
+	deque < string > _label;
+	deque < deque<float> > _data;
+	data_frame(deque<string>,deque<deque<float> >); // Constructeur basique
+	data_frame(deque<string>); // Ce constructeur permet de spécifier uniquement les labels et d'importer les données via les méthodes définies dans underlyings.h
 	data_frame();
 	~data_frame();
-	vector<float> getnav(string);
+	deque<float> getnav(string);
 };
 
-int search_st(vector<string>, string);
+int search_st(deque<string>, string);
+extern data_frame data;  // On déclare ici la variable globale data qui contiendra toutes les données, elle sera modifiée dans différente parties du programme

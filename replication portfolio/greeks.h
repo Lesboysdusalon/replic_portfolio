@@ -1,4 +1,5 @@
 #pragma once
+#include <deque>
 #include <vector>
 #include <iostream>
 using namespace std;

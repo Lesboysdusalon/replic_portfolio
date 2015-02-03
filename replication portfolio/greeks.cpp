@@ -5,7 +5,6 @@ const vector<float> vect_0;
 const vector<vector<float> > vect_00;
 
 
-
 vector<vector<float> > calculate_delta(vector<float> nav, vector<string> ul)
 {
 	/* for (int i = 0; i < ul.size(); i++)
@@ -15,8 +14,6 @@ vector<vector<float> > calculate_delta(vector<float> nav, vector<string> ul)
 	}*/
 	return vect_00;
 }
-
-
 
 vector<vector<float> > calculate_gamma(vector<float> nav, vector<string> ul)
 {

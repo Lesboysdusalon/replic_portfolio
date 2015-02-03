@@ -1,4 +1,5 @@
 #pragma once
+#include <deque>
 #include <vector>
 #include <iostream>
 #include "greeks.h"
@@ -8,14 +9,14 @@ using namespace std;
 class Portfolio
 {
 public:
-	vector<float> nav;
-	vector<string> ul;
-	int maturity;
-	vector<vector<float> > delta;
-	vector<vector<float> > gamma;
-	vector<vector<float> > vega;
-	vector<float> rho;
-	vector<float> theta;
+	vector<float> _nav;
+	vector<string> _ul;
+	int _maturity;
+	vector<vector<float> > _delta;
+	vector<vector<float> > _gamma;
+	vector<vector<float> > _vega;
+	vector<float> _rho;
+	vector<float> _theta;
 
 	Portfolio(vector<float>, vector<string>, int);
 	Portfolio();

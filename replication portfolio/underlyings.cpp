@@ -1,17 +1,15 @@
 #pragma once
 #include "underlyings.h"
-#include "data_frame.h"
-#include <deque>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <string>
 using namespace std;
+
+// Le code de se fichier est issu de la source suivante : http://www.cplusplus.com/forum/beginner/10756/
+// Il permet d'importer des fichiers CSV.
 
 /*	Les données concernant le cours historique des underlyings est téléchargée via
 	le site Yahoofinance sous format CSV. 
 	Il faut donc importer les données sous C++ sous la forme d'une matrice.*/
 // -------------------------------------------------------------------------------
+
 
 // conversion du format csv en matrice
 bool data_t::load(const string& filename)
@@ -51,6 +49,16 @@ bool data_t::save(ostream& outs)
 	}
 	return outs.good();
 }
-// On ouvre la console et exécute la conversion des données préalablement téléchargées
-// Pour cette importation, nous nous sommes aidés du code suivant : 
-// http://www.cplusplus.com/forum/beginner/10756/
+
+
+// La fonction import_data permet de lancer l'importation du fichier via un invité de commande demandant de spécifier le chemin d'accès.
+
+void data_t::import_data()
+{
+	string filename;
+	cout << "File to read> ";
+	getline(cin, filename);
+	this -> load(filename);  // L'usage de "this" permet d'appliquer une méthode à l'objet de type data_t auquel la méthode import_data sera appliquée.
+	cout << "The data is:\n";
+	this -> save(cout);
+}
