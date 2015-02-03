@@ -1,5 +1,5 @@
 #include "greeks.h"
-#include "underlyings.h"
+#include "data_frame.h"
 
 const deque<float> vect_0;
 const deque<deque<float> > vect_00;
@@ -9,16 +9,18 @@ const deque<deque<float> > vect_00;
 // cela ne pose pas de problème dans la régression grâce au grand nombre de données
 deque<float> calculate_delta(deque<float> nav, string ul)
 {
-	deque<float> delta;
+	/*deque<float> delta;
+	deque<float> value_ul = data.getnav(ul);
 	delta[0] = 0; 
 	for (int i = 1; i < nav.size(); i++)
 	{
-		delta[i]=(nav[i]-nav[i-1])/(ul[i]-ul[i-1]);
+		delta[i]=(nav[i]-nav[i-1])/(value_ul[i]-value_ul[i-1]);
 	}
-	return delta;
+	return delta;*/
+	return vect_0;
 }
 
-deque<float> calculate_gamma(deque<float> nav, string ul)
+deque<float> calculate_gamma(deque<float> nav, string ul, deque<float> vol)
 {
 	deque<float> gamma;
 	deque<float> delta = calculate_delta(nav, ul);

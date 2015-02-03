@@ -8,7 +8,7 @@ using namespace std;
 // création de la structure data_t, elle va permettre de stocker les données
 // deque est plus adapté que deque en raison de la taille de la base de données
 
-struct data_t : deque <deque <float> >
+struct data_t : deque < deque <float> >
 {
 	typedef deque <deque <float> > ::iterator record_iterator;
 	typedef deque        <float>   ::iterator field_iterator;
@@ -16,4 +16,3 @@ struct data_t : deque <deque <float> >
 	bool save(const string&);
 	bool save(ostream&);
 };
-

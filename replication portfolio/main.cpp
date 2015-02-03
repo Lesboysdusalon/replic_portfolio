@@ -8,5 +8,5 @@ using namespace std;
 
 void main(){
 	float res = data._data[0][0];
-	cout << res << endl;
+	cout << res;
 }

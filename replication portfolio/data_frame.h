@@ -14,7 +14,7 @@ public:
 	deque < string > _label;
 	deque < deque<float> > _data;
 	data_frame(deque<string>,deque<deque<float> >); // Constructeur basique
-	data_frame(deque<string>, string); // Ce constructeur permet de spécifier uniquement les labels et le chemin d'accès du fichier csv pour importer les données via les méthodes définies dans underlyings.h
+	data_frame(deque<string>,const string&); // Ce constructeur permet de spécifier uniquement les labels et le chemin d'accès du fichier csv pour importer les données via les méthodes définies dans underlyings.h
 	data_frame();
 	~data_frame();
 	deque<float> getnav(string);

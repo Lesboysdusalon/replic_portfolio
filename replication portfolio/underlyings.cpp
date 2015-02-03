@@ -49,4 +49,3 @@ bool data_t::save(ostream& outs)
 	}
 	return outs.good();
 }
-
