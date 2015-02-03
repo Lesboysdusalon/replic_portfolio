@@ -48,7 +48,7 @@ deque<float> data_frame::getnav(string s)
 }
 
 
-// Pour cet exemple, on importe juste les quotations mensuelles du cac 40, de Jan 2000 à Dec 2014
-deque<string> s;
+// Ici est spécifié les labels des données à importer, ainsi que la localisation du fichier csv
+deque<string> s = { "vol_sp","LIBOR 3M USD","sp"};
 const string filename = "..\\vix_libor_sp.csv";
 data_frame data(s,filename);
