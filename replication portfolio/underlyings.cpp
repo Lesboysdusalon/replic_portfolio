@@ -18,11 +18,11 @@ bool data_t::load(const string& filename)
 	ifstream f(filename.c_str());
 	while (getline(f, s))
 	{
-		deque <float> record;
+		deque <double> record;
 		istringstream iss(s);
 		while (getline(iss, s, ','))
 		{
-			float fieldvalue = 0.0f;
+			double fieldvalue = 0.0f;
 			istringstream(s) >> fieldvalue;
 			record.push_back(fieldvalue);
 		}

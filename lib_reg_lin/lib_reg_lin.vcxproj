@@ -11,19 +11,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{88E57AA8-83FF-41C7-A6A4-65887A32719E}</ProjectGuid>
+    <ProjectGuid>{0CF5A002-03A6-454B-BAA7-9E20D3431E10}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>replicationportfolio</RootNamespace>
+    <RootNamespace>lib_reg_lin</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -39,24 +39,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\lib_reg_lin\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -68,35 +62,49 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="data_frame.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Option.cpp" />
-    <ClCompile Include="Portfolio.cpp" />
-    <ClCompile Include="greeks.cpp" />
-    <ClCompile Include="underlyings.cpp" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="data_frame.h" />
-    <ClInclude Include="Option.h" />
-    <ClInclude Include="Portfolio.h" />
-    <ClInclude Include="greeks.h" />
-    <ClInclude Include="underlyings.h" />
+    <ClInclude Include="alglibinternal.h" />
+    <ClInclude Include="alglibmisc.h" />
+    <ClInclude Include="ap.h" />
+    <ClInclude Include="dataanalysis.h" />
+    <ClInclude Include="diffequations.h" />
+    <ClInclude Include="fasttransforms.h" />
+    <ClInclude Include="integration.h" />
+    <ClInclude Include="interpolation.h" />
+    <ClInclude Include="linalg.h" />
+    <ClInclude Include="optimization.h" />
+    <ClInclude Include="solvers.h" />
+    <ClInclude Include="specialfunctions.h" />
+    <ClInclude Include="statistics.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\lib_reg_lin\lib_reg_lin.vcxproj">
-      <Project>{0cf5a002-03a6-454b-baa7-9e20d3431e10}</Project>
-    </ProjectReference>
+    <ClCompile Include="alglibinternal.cpp" />
+    <ClCompile Include="alglibmisc.cpp" />
+    <ClCompile Include="ap.cpp" />
+    <ClCompile Include="dataanalysis.cpp" />
+    <ClCompile Include="diffequations.cpp" />
+    <ClCompile Include="fasttransforms.cpp" />
+    <ClCompile Include="integration.cpp" />
+    <ClCompile Include="interpolation.cpp" />
+    <ClCompile Include="linalg.cpp" />
+    <ClCompile Include="optimization.cpp" />
+    <ClCompile Include="solvers.cpp" />
+    <ClCompile Include="specialfunctions.cpp" />
+    <ClCompile Include="statistics.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

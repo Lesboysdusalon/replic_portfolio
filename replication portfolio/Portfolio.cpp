@@ -1,7 +1,7 @@
 #include "Portfolio.h"
 using namespace std;
 
-Portfolio::Portfolio(deque<float> nav, string ul, int maturity)
+Portfolio::Portfolio(deque<double> nav, string ul, int maturity)
 {
 	_nav = nav;
 	_ul = ul;

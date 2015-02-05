@@ -15,7 +15,7 @@ int search_st(deque<string> l, string s)
 	return k;
 }
 
-data_frame::data_frame(deque<string> s, deque<deque<float> > v)
+data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 {
 	_label = s;
 	_data = v;
@@ -40,10 +40,10 @@ data_frame::~data_frame()
 }
 
 
-deque<float> data_frame::getnav(string s)
+deque<double> data_frame::getnav(string s)
 {
 	int k = search_st(_label, s);
-	deque<float> res = _data[k];
+	deque<double> res = _data[k];
 	return res;
 }
 
@@ -52,3 +52,18 @@ deque<float> data_frame::getnav(string s)
 deque<string> s = { "vol_sp","LIBOR 3M USD","sp"};
 const string filename = "..\\vix_libor_sp.csv";
 data_frame data(s,filename);
+
+// Cette fonction permet de convertir un vecteur de taux quaterly compounded en un taux continuously compounded
+// Cela nous perment d'utiliser la formule de Black-Scholes
+// A partir de maintenant, le taux utilisé sera le taux libor continuously compounded
+deque<double> convestion_to_continuously_compounded_rate(string interest_rate)
+{
+	deque<double> quaterly_compounded_rate = data.getnav(interest_rate);
+	deque<double> continuously_compounded_rate;
+	double m = 360 / 91;
+	for (size_t i = 0; i < quaterly_compounded_rate.size(); i++)
+	{
+		continuously_compounded_rate[i] = m*log(1 + quaterly_compounded_rate[i] / m);
+	}
+	return continuously_compounded_rate;
+}
