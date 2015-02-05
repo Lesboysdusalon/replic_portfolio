@@ -5,7 +5,7 @@
 #include "greeks.h"
 using namespace std;
 
-// La classe portefeuille se caractérise par sa nav et les grecs classiques
+// La classe portefeuille se caractérise par sa nav, son sous jacent, sa maturité, et ses grecques
 class Portfolio
 {
 public:
@@ -17,7 +17,6 @@ public:
 	deque<double> _vega;
 	deque<double> _rho;
 	deque<double> _theta;
-
 	Portfolio(deque<double>, string, int);
 	Portfolio();
 	~Portfolio();

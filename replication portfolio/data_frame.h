@@ -18,8 +18,9 @@ public:
 	data_frame();
 	~data_frame();
 	deque<double> getnav(string);
-	deque<double> convestion_to_continuously_compounded_rate(string);
+	void change_rate();
 };
 
 int search_st(deque<string>, string);
 extern data_frame data;  // On déclare ici la variable globale data qui contiendra toutes les données, elle sera modifiée dans différente parties du programme
+deque<double> converter_to_continuously_compounded_rate(deque<double>);
