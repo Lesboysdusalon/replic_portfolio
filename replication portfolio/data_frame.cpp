@@ -6,7 +6,8 @@ using namespace std;
 int search_st(deque<string> l, string s)  
 {
 	int	k = 0;
-	for (int i = 0; i != l.size(); i++){
+	for (int i = 0; i != l.size(); i++)
+	{
 		if (l[i] == s)
 		{
 			k = i;

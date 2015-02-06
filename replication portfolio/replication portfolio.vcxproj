@@ -85,6 +85,7 @@
     <ClCompile Include="Portfolio.cpp" />
     <ClCompile Include="greeks.cpp" />
     <ClCompile Include="underlyings.cpp" />
+    <ClCompile Include="Vanilla_Products.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_frame.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Portfolio.h" />
     <ClInclude Include="greeks.h" />
     <ClInclude Include="underlyings.h" />
+    <ClInclude Include="Vanilla_Products.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lib_reg_lin\lib_reg_lin.vcxproj">
