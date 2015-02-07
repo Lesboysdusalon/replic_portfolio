@@ -89,10 +89,10 @@ deque<double> nav_put(string ul, int maturity, int order, double strike)
 	return value_put;
 }
 
-Option::Option(string ul, int maturity, int order, double strike, bool x)
+Option::Option(string ul, int maturity, int order, double strike, string type)
 {
 	
-	_nav = x ? nav_call(ul, maturity, order, strike) : nav_put(ul, maturity, order, strike); // si x=1, on a un call
+	_nav = type=="call" ? nav_call(ul, maturity, order, strike) : nav_put(ul, maturity, order, strike); // si x=1, on a un call
 	_ul = ul;
 	_maturity = maturity;
 	_delta = calculate_delta(_nav, ul);  // Il est discutable de calculer les greeks de cette façon, il aurait aussi été possible de le faire en utilisant les formules analytiques dérivées de la formule de procing de Black Scholes.

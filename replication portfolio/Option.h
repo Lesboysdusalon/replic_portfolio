@@ -20,7 +20,7 @@ public:
 	deque<double> _vega;
 	deque<double> _rho;
 	deque<double> _theta;
-	Option(string ul, int maturity, int order, double strike, bool x); // Ce constructeur sert à construire des options vanilles. Ici x désigne si l'option à construire est un call ou un put, les autres paramètres sont les paramètres de pricing de l'option.
+	Option(string ul, int maturity, int order, double strike, string type); // Ce constructeur sert à construire des options vanilles. Ici type désigne si l'option à construire est un call ou un put, les autres paramètres sont les paramètres de pricing de l'option.
 	Option();
 	~Option();
 };
