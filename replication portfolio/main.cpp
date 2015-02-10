@@ -5,8 +5,8 @@
 using namespace std;
 
 
-void main(){
-	double res = data._data[0][0];
-	cout << res;
+void main()
+{
+	cout << "";
 }
 

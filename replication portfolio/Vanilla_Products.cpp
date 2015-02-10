@@ -16,9 +16,8 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 	deque<double> rho;
 	deque<double> theta;
 	deque<double> nav;
-	_data[0] = data.getnav(ul); // On inclus dans la base de données vanilles, ie l'objet en cours de construction, le sous jacent lui même
-	_label[0] = ul;
-
+	_data.push_back(data.getnav(ul)); // On inclus dans la base de données vanilles, ie l'objet en cours de construction, le sous jacent lui même
+	_label.push_back(ul);
 	// Les boucles suivantes permettent de rajouter à la base de produits vanille toutes les options définies par les paramètres du constructeur
 	int c = 1;
 	for (size_t o = 0; o < order.size(); o++)
@@ -30,30 +29,28 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 				for (size_t l = 0; l < x.size(); l++)
 				{
 					Option Vanilla_Option(ul, maturity[t], order[o], strike[k], x[l]);
-					_data[c] = Vanilla_Option._nav;
-					_data[c + 1] = Vanilla_Option._delta;
-					_data[c + 2] = Vanilla_Option._gamma;
-					_data[c + 3] = Vanilla_Option._vega;
-					_data[c + 4] = Vanilla_Option._rho;
-					_data[c + 5] = Vanilla_Option._theta;
-					_label[c] = "_nav";
-					_label[c + 1] = "_delta";
-					_label[c + 2] = "_gamma";
-					_label[c + 3] = "_vega";
-					_label[c + 4] = "_rho";
-					_label[c + 5] = "_theta";
+					_data.push_back(Vanilla_Option._nav);
+					_data.push_back(Vanilla_Option._delta);
+					_data.push_back(Vanilla_Option._gamma);
+					_data.push_back(Vanilla_Option._vega);
+					_data.push_back(Vanilla_Option._rho);
+					_data.push_back(Vanilla_Option._theta);
+					_label.push_back("_nav");
+					_label.push_back("_delta");
+					_label.push_back("_gamma");
+					_label.push_back("_vega");
+					_label.push_back("_rho");
+					_label.push_back("_theta");
 					for (int j = 0; j < 6; j++)
 					{
 						_label[c + j] = ul + "_" + x[l] + _label[c + j] + "_maturity_" + std::to_string(t) + "_order_" + std::to_string(o) + "_strike_" + std::to_string(k);
 					}
 					// ex label : CAC40_call_delta_maturity_31_order_0_strike_10
-					c += 6;
-					  
+					c += 6;  
 				}
 			}
 		}
-	};
-
+	}
 }
 
 Vanilla_Products::Vanilla_Products()

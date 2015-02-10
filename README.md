@@ -1,5 +1,6 @@
 # replic_portfolio
 
 Nouvelles modifs à faire : 
-changer la formule de BS (taux d'intérêt non constant).
-Régler le problème de division par 0 dans le calcul des grecques, par l'introduction d'une valeur reconnaissable ou par utilisation des formules analytiques. 
+Effectuer la régression à la date 2, pour éviter le fait que les grecques sont toujours nulles à t=t_0
+Attention : lors de la construction de la matrice de régression, penser à supprimer les valeurs manquantes, ie les valeurs de greeks égales à +/-INF, ou IND.
+

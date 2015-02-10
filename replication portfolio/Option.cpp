@@ -14,22 +14,21 @@ deque<double> nav_call(string ul, int maturity, int order, double strike)
 	double ST = value_ul[order];
 	for (size_t i = 0; i < value_ul.size(); i++)
 	{
-		d1[i] = pow(vol[i]*sqrt(maturity - i),-1) * ( log(ST*pow(strike,-1)) + (libor[i] + 0,5*vol[i])*(maturity - i));
-		d2[i] = d1[i] - vol[i] * sqrt(maturity - i);
+		d1.push_back(pow(vol[i]*sqrt(maturity - i),-1) * ( log(ST*pow(strike,-1)) + (libor[i] + 0,5*vol[i])*(maturity - i)));
+		d2.push_back(d1[i] - vol[i] * sqrt(maturity - i));
 	}
 	for (int i = order; i < maturity; i++)
 	{
-		value_call[i] = ST*alglib::normaldistribution(d1[i]) - strike*exp(-libor[i]*(maturity - i))*alglib::normaldistribution(d2[i]); // La fonction de répartition de la loi normale est importée à partir de la librairie lib_reg_lin
+		value_call.push_back(ST*alglib::normaldistribution(d1[i]) - strike*exp(-libor[i]*(maturity - i))*alglib::normaldistribution(d2[i])); // La fonction de répartition de la loi normale est importée à partir de la librairie lib_reg_lin
 	}
-	for (int i = 0; i < order ; i++)
+	for (int i = order - 1; i >= 0; i--)
 	{
-		value_call[i] = value_call[order] * exp(-libor[i]*(order - i));
+		value_call.push_front(value_call[order] * exp(-libor[i] * (order - i)));
 	}
 	for (size_t i = maturity; i < value_ul.size(); i++)
 	{
-		value_call[i] = value_call[maturity] * exp(-libor[i]*(maturity - i));
+		value_call.push_back(value_call[maturity] * exp(-libor[i]*(maturity - i)));
 	}
-
 	/*nav_call[0] = value_ul[0]; //on considère qu'aucun ordre n'est passé aux dates t=0 et t=1 (greeks non définis)
 	for (size_t i = 1; i < (order - 1); i++)
 	{
@@ -69,28 +68,27 @@ deque<double> nav_put(string ul, int maturity, int order, double strike)
 	double ST = value_ul[order];
 	for (size_t i = 0; i < value_ul.size(); i++)
 	{
-		d1[i] = pow(vol[i] * sqrt(maturity - i), -1) * (log(ST*pow(strike, -1)) + (libor[i] + 0,5 * vol[i])*(maturity - i));
-		d2[i] = d1[i] - vol[i] * sqrt(maturity - i);
+		d1.push_back(pow(vol[i] * sqrt(maturity - i), -1) * (log(ST*pow(strike, -1)) + (libor[i] + 0,5 * vol[i])*(maturity - i)));
+		d2.push_back(d1[i] - vol[i] * sqrt(maturity - i));
 	}
 	for (int i = order; i < maturity; i++)
 	{
-		value_put[i] = -ST*alglib::normaldistribution(-d1[i]) + strike*exp(-libor[i]*(maturity - i))*alglib::normaldistribution(-d2[i]);
+		value_put.push_back(-ST*alglib::normaldistribution(-d1[i]) + strike*exp(-libor[i]*(maturity - i))*alglib::normaldistribution(-d2[i]));
 	}
-	for (int i = 0; i < order; i++)
+	for (int i = order - 1; i >= 0; i--)
 	{
-		value_put[i] = value_put[order] * exp(-libor[i]*(order - i));
+		value_put.push_front(value_put[order] * exp(-libor[i] * (order - i)));
 	}
 	for (size_t i = maturity; i < value_ul.size(); i++)
 	{
-		value_put[i] = value_put[maturity] * exp(-libor[i]*(maturity - i));
+		value_put.push_back(value_put[maturity] * exp(-libor[i]*(maturity - i)));
 	}
 	return value_put;
 }
 
 Option::Option(string ul, int maturity, int order, double strike, string type)
 {
-	
-	_nav = type=="call" ? nav_call(ul, maturity, order, strike) : nav_put(ul, maturity, order, strike); // si x=1, on a un call
+	_nav = type=="call" ? nav_call(ul, maturity, order, strike) : nav_put(ul, maturity, order, strike);
 	_ul = ul;
 	_delta = calculate_delta(_nav, ul);  // Il est discutable de calculer les greeks de cette façon, il aurait aussi été possible de le faire en utilisant les formules analytiques dérivées de la formule de procing de Black Scholes.
 	_gamma = calculate_gamma(_nav, ul);
