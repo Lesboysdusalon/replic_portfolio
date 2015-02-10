@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="data_frame.cpp" />
+    <ClCompile Include="Financial_product.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="Portfolio.cpp" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data_frame.h" />
+    <ClInclude Include="Financial_product.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Portfolio.h" />
     <ClInclude Include="greeks.h" />

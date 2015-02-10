@@ -36,6 +36,9 @@
     <ClCompile Include="Vanilla_Products.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Financial_product.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Portfolio.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vanilla_Products.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Financial_product.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

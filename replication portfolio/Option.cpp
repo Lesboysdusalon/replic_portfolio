@@ -1,8 +1,6 @@
 #include "Option.h"
 using namespace std;
 
-const deque<double> vect_0;
-
 //Nav d'un call d'option de ul, maturity, strike donnés dont l'ordre est passé à la date order
 // Le calcul de sa valeur se fait par formule de BS entre la date order et la maturité, et par actualisation par taux d'escompte des valeurs aux bornes pour le reste.
 deque<double> nav_call(string ul, int maturity, int order, double strike)
@@ -94,7 +92,6 @@ Option::Option(string ul, int maturity, int order, double strike, string type)
 	
 	_nav = type=="call" ? nav_call(ul, maturity, order, strike) : nav_put(ul, maturity, order, strike); // si x=1, on a un call
 	_ul = ul;
-	_maturity = maturity;
 	_delta = calculate_delta(_nav, ul);  // Il est discutable de calculer les greeks de cette façon, il aurait aussi été possible de le faire en utilisant les formules analytiques dérivées de la formule de procing de Black Scholes.
 	_gamma = calculate_gamma(_nav, ul);
 	_vega = calculate_vega(_nav, ul);

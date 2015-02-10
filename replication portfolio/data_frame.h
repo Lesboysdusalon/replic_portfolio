@@ -22,5 +22,5 @@ public:
 };
 
 int search_st(deque<string>, string);
-extern data_frame data;  // On déclare ici la variable globale data qui contiendra toutes les données, elle sera modifiée dans différente parties du programme
+extern data_frame data;  // On déclare ici la variable globale data qui contiendra toutes les données
 deque<double> converter_to_continuously_compounded_rate(deque<double>);

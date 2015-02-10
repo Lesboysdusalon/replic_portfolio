@@ -2,9 +2,10 @@
 
 /*	Le constructeur Vanilla_Products permet de construire un deque<double> contenant toutes les nav et les greeks des 
 	produits vanilles utilisés ensuite pour la régression.
-	Chaque deque pris en argument représente l'ensemble des valeurs possibles pouvant être prises par un produit vanille.
+	Chaque deque pris en argument représente l'ensemble des paramètres de pricing d'une option vanille.
 	Par exemple, le deque<int> maturity contient toutes les valeurs possibles de maturité.
 	On considère que toutes les combinaisons de maturité, de strike etc. sont possibles.
+	La base de données ainsi construite contiendra un ensemble d'options vanilles, mais aussi le sous jacent et un actif sans risque
   */
 
 Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> order, deque<double> strike, deque<string> x)
@@ -15,8 +16,10 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 	deque<double> rho;
 	deque<double> theta;
 	deque<double> nav;
-	_data[0] = data.getnav(ul);
+	_data[0] = data.getnav(ul); // On inclus dans la base de données vanilles, ie l'objet en cours de construction, le sous jacent lui même
 	_label[0] = ul;
+
+	// Les boucles suivantes permettent de rajouter à la base de produits vanille toutes les options définies par les paramètres du constructeur
 	int c = 1;
 	for (size_t o = 0; o < order.size(); o++)
 	{
@@ -27,7 +30,6 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 				for (size_t l = 0; l < x.size(); l++)
 				{
 					Option Vanilla_Option(ul, maturity[t], order[o], strike[k], x[l]);
-
 					_data[c] = Vanilla_Option._nav;
 					_data[c + 1] = Vanilla_Option._delta;
 					_data[c + 2] = Vanilla_Option._gamma;
@@ -50,7 +52,8 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 				}
 			}
 		}
-	}
+	};
+
 }
 
 Vanilla_Products::Vanilla_Products()
