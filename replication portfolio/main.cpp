@@ -3,13 +3,12 @@
 #include <dataanalysis.h>
 using namespace std;
 
-// test de la régresion linéraire avec un portefeuille composé d'une option ayant ces caractéristiques :
-// ul = "sp", ie S&P500
-// maturity = 300
-// strike = 1200
-// order = 0, ie l'option est crée à t=0
-// type = "call"
-
+/* Test de la régresion linéraire avec un portefeuille composé d'une option ayant ces caractéristiques :
+ul = "sp", ie S&P500
+maturity = 300
+strike = 1200
+order = 0, ie l'option est crée à t=0
+type = "call" */
 
 void main()
 {
@@ -29,10 +28,10 @@ void main()
 	Portfolio port(opt._nav, "sp", data);
 	
 	// Création de la base de produits vanilles
-	deque<int> maturity = { 100, 150, 200, 300, 500 };
-	deque<int> order = { 0, 50 }; // ATTENTION : par souci de cohérence, order est nécessairement toujours inférieur à maturity
-	deque<double> strike = { 800, 1000, 1200, 1500 };
-	deque<string> type = { "call", "put" };
+	deque<int> maturity = { 300 };
+	deque<int> order = { 0 }; // ATTENTION : par souci de cohérence, order est nécessairement toujours inférieur à maturity
+	deque<double> strike = { 1200 };
+	deque<string> type = { "call","put" };
 	Vanilla_Products van("sp", maturity, order, strike, type, data);
 
 	// Création de la matrice de régression
@@ -46,8 +45,9 @@ void main()
 
 	// Convertion de la matrice en real_2d_array
 	alglib::real_2d_array mat = convert_matrix(m._data);
-	int nb_obs = m._data[0].size();
-	int nb_vars = m._data.size();
+	// Définition du nb d'observations et de variables pour la régression
+	alglib::ae_int_t nb_obs = m._data[0].size();
+	alglib::ae_int_t nb_vars = m._data.size();
 
 	// Regression linéaire
 	alglib::linearmodel result;

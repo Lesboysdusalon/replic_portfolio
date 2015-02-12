@@ -65,8 +65,22 @@ data_frame::~data_frame()
 deque<double> data_frame::getnav(string s)  // Cette fonction très utile permet de récupérer une des séries de données du data_frame à partir de son étiquette
 {
 	int k = distance(_label.begin(), find(_label.begin(), _label.end(), s)); // Cela permet de récupérer l'indice de la variable recherchée
-	deque<double> res = _data[k];
-	return res;
+	try
+	{
+		if (k == _label.size())
+		{
+			throw 1;
+		}
+		else
+		{
+			deque<double> res = _data[k];
+			return res;
+		}
+	}
+	catch (int e)
+	{
+		cout << "getnav n'a pas trouve le label recherche" << e << endl;
+	}
 }
 
 void data_frame::include_financial_product(Financial_product a, string name)
@@ -78,7 +92,7 @@ void data_frame::include_financial_product(Financial_product a, string name)
 	_data.push_back(a._theta);
 	_data.push_back(a._vega);
 	_label.push_back(name + "_nav");
-	_label.push_back(name + "_theta");
+	_label.push_back(name + "_delta");
 	_label.push_back(name + "_gamma");
 	_label.push_back(name + "_rho");
 	_label.push_back(name + "_theta");

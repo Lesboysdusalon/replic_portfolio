@@ -20,7 +20,7 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 	this -> include_financial_product(underlying,ul);
 	this -> include_financial_product(risk_free_asset,"Risk free asset");
 	// Les boucles suivantes permettent de rajouter à la base de produits vanille toutes les options définies par les paramètres du constructeur
-	int c = 1;
+	int c = 12; // c représente le nombre de données inscrites dans _data, et dans dans _label
 	for (size_t o = 0; o < order.size(); o++)
 	{
 		for (size_t t = 0; t < maturity.size(); t++)
@@ -33,7 +33,7 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 					this -> include_financial_product(Vanilla_Option,"");
 					for (int j = 0; j < 6; j++)
 					{
-						_label[c + j] = ul + "_" + type[l] + "_maturity_" + std::to_string(t) + "_order_" + std::to_string(o) + "_strike_" + std::to_string(k) + _label[c + j];
+						_label[c + j] = ul + "_" + type[l] + "_maturity_" + std::to_string(maturity[t]) + "_order_" + std::to_string(order[o]) + "_strike_" + std::to_string(strike[k]) + _label[c + j];
 					}
 					// ex label : CAC40_call_maturity_31_order_0_strike_10_delta. Cette labélisation permet de retrouver les données facilement.
 					c += 6;  

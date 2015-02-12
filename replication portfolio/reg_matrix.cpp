@@ -37,7 +37,7 @@ reg_matrix::reg_matrix(Portfolio port, Vanilla_Products vanilla, int begin, int 
 				for (size_t l = 0; l < local_data._type.size(); l++)
 				{
 					// Pour retrouver les differents produits, on réutilise la labélisation des options défini dans Options.ccp
-					string local_label = local_data._ul + "_" + local_data._type[l] + "_maturity_" + std::to_string(t) + "_order_" + std::to_string(o) + "_strike_" + std::to_string(k);
+					string local_label = local_data._ul + "_" + local_data._type[l] + "_maturity_" + std::to_string(local_data._maturity[t]) + "_order_" + std::to_string(local_data._order[o]) + "_strike_" + std::to_string(local_data._strike[k]);
 					this->add_product(local_data, local_label, begin, end);
 				}
 			}
@@ -54,16 +54,17 @@ reg_matrix::~reg_matrix()
 {
 }
 
-
+// Cette fonction permet non seulement de convertir des données sous forme
+// structure dynamique vs statique
 alglib::real_2d_array convert_matrix(deque<deque<double> > d)
 {
 	alglib::real_2d_array res;
-	res.setlength(d[0].size(), d.size());
+	res.setlength(d[0].size(),d.size());
 	for (size_t i = 0; i < d[0].size(); i++)
 	{
 		for (size_t j = 0; j < d.size(); j++)
 		{
-			res[i][j] = d[i][j];
+			res(i,j) = d[j][i];
 		};
 	}
 	return res;
