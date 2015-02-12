@@ -8,16 +8,17 @@
 	La base de données ainsi construite contiendra un ensemble d'options vanilles, mais aussi le sous jacent et un actif sans risque
   */
 
-Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> order, deque<double> strike, deque<string> x)
+Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> order, deque<double> strike, deque<string> type, data_frame data)
 {
-	deque<double> delta;
-	deque<double> gamma;
-	deque<double> vega;
-	deque<double> rho;
-	deque<double> theta;
-	deque<double> nav;
-	_data.push_back(data.getnav(ul)); // On inclus dans la base de données vanilles, ie l'objet en cours de construction, le sous jacent lui même
-	_label.push_back(ul);
+	_ul = ul;
+	_maturity = maturity;
+	_order = order;
+	_strike = strike;
+	_type = type;
+	Basic_products underlying(true, ul, data); // On inclus dans la base de données vanilles, ie l'objet en cours de construction, le sous jacent lui même
+	Basic_products risk_free_asset(false, ul, data);
+	this -> include_financial_product(underlying,ul);
+	this -> include_financial_product(risk_free_asset,"Risk free asset");
 	// Les boucles suivantes permettent de rajouter à la base de produits vanille toutes les options définies par les paramètres du constructeur
 	int c = 1;
 	for (size_t o = 0; o < order.size(); o++)
@@ -26,26 +27,15 @@ Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> or
 		{
 			for (size_t k = 0; k < strike.size(); k++)
 			{
-				for (size_t l = 0; l < x.size(); l++)
+				for (size_t l = 0; l < type.size(); l++)
 				{
-					Option Vanilla_Option(ul, maturity[t], order[o], strike[k], x[l]);
-					_data.push_back(Vanilla_Option._nav);
-					_data.push_back(Vanilla_Option._delta);
-					_data.push_back(Vanilla_Option._gamma);
-					_data.push_back(Vanilla_Option._vega);
-					_data.push_back(Vanilla_Option._rho);
-					_data.push_back(Vanilla_Option._theta);
-					_label.push_back("_nav");
-					_label.push_back("_delta");
-					_label.push_back("_gamma");
-					_label.push_back("_vega");
-					_label.push_back("_rho");
-					_label.push_back("_theta");
+					Option Vanilla_Option(ul, maturity[t], order[o], strike[k], type[l], data);
+					this -> include_financial_product(Vanilla_Option,"");
 					for (int j = 0; j < 6; j++)
 					{
-						_label[c + j] = ul + "_" + x[l] + _label[c + j] + "_maturity_" + std::to_string(t) + "_order_" + std::to_string(o) + "_strike_" + std::to_string(k);
+						_label[c + j] = ul + "_" + type[l] + "_maturity_" + std::to_string(t) + "_order_" + std::to_string(o) + "_strike_" + std::to_string(k) + _label[c + j];
 					}
-					// ex label : CAC40_call_delta_maturity_31_order_0_strike_10
+					// ex label : CAC40_call_maturity_31_order_0_strike_10_delta. Cette labélisation permet de retrouver les données facilement.
 					c += 6;  
 				}
 			}

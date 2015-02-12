@@ -1,23 +1,13 @@
 #pragma once
-#include <deque>
-#pragma once
-#include <iostream>
 #include "greeks.h"
 using namespace std;
 
-// La classe portefeuille se caractérise par sa nav, son sous jacent, sa maturité, et ses grecques
-class Portfolio
+// La classe portefeuille, héritée de la classe Financial_product, avec un constructeur spécifique, permettant de construire tout les données à partir de la nav et du sous jacent, et du data_frame contenant les données d'importation.
+
+class Portfolio : public Financial_product
 {
 public:
-	deque<double> _nav;
-	string _ul;
-	int _maturity;
-	deque<double> _delta;
-	deque<double> _gamma;
-	deque<double> _vega;
-	deque<double> _rho;
-	deque<double> _theta;
-	Portfolio(deque<double>, string, int);
+	Portfolio(deque<double>, string, data_frame);
 	Portfolio();
 	~Portfolio();
 };

@@ -39,6 +39,12 @@
     <ClCompile Include="Financial_product.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="reg_matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic_products.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Portfolio.h">
@@ -60,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Financial_product.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="reg_matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Basic_products.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

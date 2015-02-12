@@ -1,8 +1,11 @@
 #pragma once
 #include <deque>
+
+
 using namespace std;
 
-// La classe Financial_product permet de donner une structure commune aux différents produits financiers que l'on manipule, elle intègre aussi la création des produits les plus basiques : le sous jacent lui même et l'actif sans risque
+// La classe Financial_product permet de donner une structure commune aux différents produits financiers que l'on manipule
+// Les différenrs produits construits à partir de cette classe seront : Portfolio, Options, et les basic_products : le risk free asset et le sous jacent
 
 class Financial_product
 {
@@ -14,7 +17,6 @@ public:
 	deque<double> _vega;
 	deque<double> _rho;
 	deque<double> _theta;
-	Financial_product(bool x, string ul); // La variable booléène permet de créer le sous jacent si x est vraie, et l'actif sans risque sinon.
 	Financial_product();
 	~Financial_product();
 };

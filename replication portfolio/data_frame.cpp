@@ -8,6 +8,22 @@ data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 	_data = v;
 }
 
+// Cette fonction permet de convertir un vecteur de taux quaterly compounded en un vecteur de taux continuously compounded
+// Cela nous perment d'utiliser la formule de Black-Scholes
+// A partir de maintenant, le taux utilisé sera le taux libor continuously compounded
+deque<double> converter_to_continuously_compounded_rate(deque<double> rate)
+{
+	deque<double> continuously_compounded_rate;
+	double m = 360 / 91;
+	for (size_t i = 0; i < rate.size(); i++)
+	{
+		continuously_compounded_rate.push_back(m*log(1 + rate[i] / m));
+	}
+	return continuously_compounded_rate;
+}
+
+
+// Ici est déifini le constructeur de data_frame qui nous permettra de creer la base de données data.
 data_frame::data_frame(deque<string> s,const string& filename)
 {
 	_label = s;
@@ -24,7 +40,7 @@ data_frame::data_frame(deque<string> s,const string& filename)
 		_data.push_back(row);
 	};
 	// Les lignes suivantes permettent de convertir les taux aussitôt l'importation faite
-	deque<double> libor = converter_to_continuously_compounded_rate(data.getnav("LIBOR 3M USD"));
+	deque<double> libor = converter_to_continuously_compounded_rate(this->getnav("LIBOR 3M USD"));
 	_data[1] = libor; // RQ : toujours faire attention à placer le taux LIBOR en seconde position du fichier csv, sinon l'indice est à changer
 	// Les instructions suivantes permettent d'exprimer la volatilité comme un nombre plutôt qu'un pourcentage, ce qui n'est pas le cas initialement.
 	deque<double> vol;
@@ -53,25 +69,21 @@ deque<double> data_frame::getnav(string s)  // Cette fonction très utile permet 
 	return res;
 }
 
-
-// Cette fonction permet de convertir un vecteur de taux quaterly compounded en un vecteur de taux continuously compounded
-// Cela nous perment d'utiliser la formule de Black-Scholes
-// A partir de maintenant, le taux utilisé sera le taux libor continuously compounded
-deque<double> converter_to_continuously_compounded_rate(deque<double> rate)
+void data_frame::include_financial_product(Financial_product a, string name)
 {
-	deque<double> continuously_compounded_rate;
-	double m = 360 / 91;
-	for (size_t i = 0; i < rate.size(); i++)
-	{
-		continuously_compounded_rate.push_back(m*log(1 + rate[i] / m));
-	}
-	return continuously_compounded_rate;
+	_data.push_back(a._nav);
+	_data.push_back(a._delta);
+	_data.push_back(a._gamma);
+	_data.push_back(a._rho);
+	_data.push_back(a._theta);
+	_data.push_back(a._vega);
+	_label.push_back(name + "_nav");
+	_label.push_back(name + "_theta");
+	_label.push_back(name + "_gamma");
+	_label.push_back(name + "_rho");
+	_label.push_back(name + "_theta");
+	_label.push_back(name + "_vega");
 }
 
 
-// Ici est spécifié les labels des données à importer, ainsi que la localisation du fichier csv
-deque<string> s = { "vol_sp", "LIBOR 3M USD", "sp" };
-const string filename = "..\\vix_libor_sp.csv";
 
-// Et voilà la création du data frame
-data_frame data(s, filename);

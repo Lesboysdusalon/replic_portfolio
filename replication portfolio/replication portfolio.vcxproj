@@ -79,21 +79,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Basic_products.cpp" />
     <ClCompile Include="data_frame.cpp" />
     <ClCompile Include="Financial_product.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="Portfolio.cpp" />
     <ClCompile Include="greeks.cpp" />
+    <ClCompile Include="reg_matrix.cpp" />
     <ClCompile Include="underlyings.cpp" />
     <ClCompile Include="Vanilla_Products.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Basic_products.h" />
     <ClInclude Include="data_frame.h" />
     <ClInclude Include="Financial_product.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Portfolio.h" />
     <ClInclude Include="greeks.h" />
+    <ClInclude Include="reg_matrix.h" />
     <ClInclude Include="underlyings.h" />
     <ClInclude Include="Vanilla_Products.h" />
   </ItemGroup>
