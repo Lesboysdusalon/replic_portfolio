@@ -1,6 +1,6 @@
 # replic_portfolio
 
-Loic Guillet & Matthieu Martal
+Loïc Guillet & Matthieu Martal
 
 
 ## Objectif du Projet
