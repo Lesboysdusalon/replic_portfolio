@@ -19,10 +19,10 @@ data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 deque<double> converter_to_continuously_compounded_rate(deque<double> rate)
 {
 	deque<double> continuously_compounded_rate;
-	double m = 360  / 91;
+	double m = 360.0 / 91.0;
 	for (size_t i = 0; i < rate.size(); i++)
 	{
-		continuously_compounded_rate.push_back(m*log(1 + rate[i] / m));
+		continuously_compounded_rate.push_back(m*log(1 + rate[i] / (100.0*m)));
 	}
 	return continuously_compounded_rate;
 }
@@ -51,7 +51,7 @@ data_frame::data_frame(deque<string> s,const string& filename)
 	deque<double> vol;
 	for (size_t i = 0; i < _data[0].size(); i++)
 	{
-		vol.push_back(_data[0][i] / 100); // RQ : toujours penser à mettre la volatilité en premier, dans le cas où il y a plusieurs volatilités, il faut réimplémenter cette fonction
+		vol.push_back(_data[0][i] / 100.0); // RQ : toujours penser à mettre la volatilité en premier, dans le cas où il y a plusieurs volatilités, il faut réimplémenter cette fonction
 	}
 	_data[0] = vol;
 }
@@ -85,6 +85,9 @@ void data_frame::include_financial_product(const Financial_product &a, string na
 
 
 //	Cette fonction très utile permet de récupérer une des séries de données du data_frame à partir de son étiquette
+//	RQ : Cette fonction génère un Warning car elle ne renvoie pas de valeur si le label recherché n'est pas trouvé
+//	Cela est normal. 
+//	Si le label recherché n'est pas trouvé, le message renvoyé alerte l'utilisateur : paramètres entrés dans la fonction sont incorrects.
 deque<double> getnav(string s, const data_frame &d)
 {
 	int k = distance(d._label.begin(), find(d._label.begin(), d._label.end(), s)); // Cela permet de récupérer l'indice de la variable recherchée

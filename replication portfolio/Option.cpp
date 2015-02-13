@@ -21,29 +21,27 @@ deque<double> nav_call(string ul, int maturity, int order, double strike, const 
 	deque<double> vol = getnav("vol_"+ul, data);  // On utilise le VIX comme volatilité implicite du S&P 500
 	deque<double> d1;
 	deque<double> d2;
-	int low_border = max(order, 0);
-	int high_border = min(0, 0);
-	for (size_t i = 0; i < value_ul.size(); i++)
-	{
-		d1.push_back(pow(vol[i] * sqrt((maturity - i) / 360), -1) * (log(value_ul[i] * pow(strike, -1)) + (libor[i] + 0, 5 * pow(vol[i], 2))*((maturity - i) / 360)));
-		d2.push_back(d1[i] - vol[i] * sqrt((maturity - i) / 360));
-	}
-	// Pricing avec BS
+	// Pricing avec la formule de BS
 	for (int i = order; i < maturity; i++)
 	{
-		value_call.push_back(value_ul[i] * alglib::normaldistribution(d1[i]) - strike*exp(-libor[i] * ((maturity - i) / 360)*alglib::normaldistribution(d2[i]))); // La fonction de répartition de la loi normale evalue_ul[i] importée à partir de la librairie lib_reg_lin
+		d1.push_back(pow(vol[i] * sqrt((maturity - i) / 360.0), -1) * (log(value_ul[i] * pow(strike, -1)) + (libor[i] + 0.5 * pow(vol[i], 2))*((maturity - i) / 360.0)));
+		d2.push_back(d1[i] - vol[i] * sqrt((maturity - i) / 360.0));
+	}
+	for (int i = order; i < maturity; i++)
+	{
+		value_call.push_back(value_ul[i] * alglib::normaldistribution(d1[i]) - strike*exp(-libor[i] * ((maturity - i) / 360.0))*alglib::normaldistribution(d2[i])); // La fonction de répartition de la loi normale evalue_ul[i] importée à partir de la librairie lib_reg_lin
 	}
 	// A maturité la valeur est égale au Pay-off
 	value_call.push_back(max(value_ul[maturity] - strike, 0.0));
 	// Actualisation de la valeur au taux sans risque, lequel est assimilé au libor
 	for (int i = order - 1; i >= 0; i--)
 	{
-		value_call.push_front(value_call[order] * exp(-libor[i] * ((order - i) / 360)));
+		value_call.push_front(value_call[order] * exp(-libor[i] * ((order - i) / 360.0)));
 	}
 	// Actualisation de la valeur au taux sans risque, lequel est assimilé au libor
 	for (size_t i = maturity + 1; i < value_ul.size(); i++)
 	{
-		value_call.push_back(value_call[maturity] * exp(-libor[i] * ((maturity - i) / 360)));
+		value_call.push_back(value_call[maturity] * exp(-libor[i] * ((maturity - i) / 360.0)));
 	}
 	return value_call;
 }
@@ -56,27 +54,27 @@ deque<double> nav_put(string ul, int maturity, int order, double strike, const d
 	deque<double> vol = getnav("vol_"+ul, data); 
 	deque<double> d1;
 	deque<double> d2;
-	for (size_t i = 0; i < value_ul.size(); i++)
+	for (int i = order; i < maturity; i++)
 	{
-		d1.push_back(pow(vol[i] * sqrt((maturity - i) / 360), -1) * (log(value_ul[i] * pow(strike, -1)) + (libor[i] + 0, 5 * pow(vol[i], 2))*((maturity - i) / 360)));
-		d2.push_back(d1[i] - vol[i] * sqrt((maturity - i) / 360));
+		d1.push_back(pow(vol[i] * sqrt((maturity - i) / 360.0), -1) * (log(value_ul[i] * pow(strike, -1)) + (libor[i] + 0.5 * pow(vol[i], 2))*((maturity - i) / 360.0)));
+		d2.push_back(d1[i] - vol[i] * sqrt((maturity - i) / 360.0));
 	}
 	// Pricing avec BS
 	for (int i = order; i < maturity; i++)
 	{
-		value_put.push_back(-value_ul[i] * alglib::normaldistribution(-d1[i]) + strike*exp(-libor[i] * ((maturity - i) / 360)*alglib::normaldistribution(-d2[i])));
+		value_put.push_back(-value_ul[i] * alglib::normaldistribution(-d1[i]) + strike*exp(-libor[i] * ((maturity - i) / 360.0))*alglib::normaldistribution(-d2[i]));
 	}
 	// A maturité la valeur est égale au Pay-off
 	value_put.push_back(max(strike - value_ul[maturity], 0.0));
 	// Actualisation de la valeur au taux sans risque, lequel est assimilé au libor
 	for (int i = order - 1; i >= 0; i--)
 	{
-		value_put.push_front(value_put[order] * exp(-libor[i] * ((order - i) / 360)));
+		value_put.push_front(value_put[order] * exp(-libor[i] * ((order - i) / 360.0)));
 	}
 	// Actualisation de la valeur au taux sans risque, lequel est assimilé au libor
 	for (size_t i = maturity + 1; i < value_ul.size(); i++)
 	{
-		value_put.push_back(value_put[maturity] * exp(-libor[i] * ((maturity - i) / 360)));
+		value_put.push_back(value_put[maturity] * exp(-libor[i] * ((maturity - i) / 360.0)));
 	}
 	return value_put;
 }

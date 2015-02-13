@@ -10,7 +10,7 @@ strike = 1200
 order = 0, ie l'option est crée à t=0
 type = "call" */
 
-void main()
+int main()
 {
 	// Création du data_frame contenant des données importées
 
@@ -22,7 +22,7 @@ void main()
 	data_frame data(s, filename); // On limite la régression avant que l'option n'arrive à maturité
 
 	// Création de l'option
-	Option opt("sp", 300, 0, 1200, "call", data);
+	Option opt("sp", 300, 0, 1200.0, "call", data);
 	
 	// Création du Portfolio constitué de cette option
 	Portfolio port(opt._nav, "sp", data);
@@ -30,7 +30,7 @@ void main()
 	// Création de la base de produits vanilles
 	deque<int> maturity = { 300 };
 	deque<int> order = { 0 }; // ATTENTION : par souci de cohérence, order est nécessairement toujours inférieur à maturity
-	deque<double> strike = { 1200 };
+	deque<double> strike = { 1200.0 };
 	deque<string> type = { "call","put" };
 	Vanilla_Products van("sp", maturity, order, strike, type, data);
 
@@ -43,18 +43,29 @@ void main()
 	// On enregistre les labels pour l'interprétation des résultats
 	deque<string> label = m._label;
 
+
 	// Convertion de la matrice en real_2d_array
 	alglib::real_2d_array mat = convert_matrix(m._data);
+
 	// Définition du nb d'observations et de variables pour la régression
-	alglib::ae_int_t nb_obs = m._data[0].size();
-	alglib::ae_int_t nb_vars = m._data.size();
+	alglib::ae_int_t nb_obs = mat.rows();
+	alglib::ae_int_t nb_vars = mat.cols() - 1;
 
 	// Regression linéaire
 	alglib::linearmodel result;
 	alglib::ae_int_t info;
 	alglib::lrreport ar;
 	alglib::lrbuild(mat, nb_obs, nb_vars, info, result, ar);
-	cout << "hello";
+	
+	// Impression des résultats
+	alglib::real_1d_array coef;
+	alglib::lrunpack(result, coef, nb_vars);
+	for (alglib::ae_int_t i = 0; i < coef.length(); i++)
+	{
+		cout << label[i]+" : " << coef[i] << endl;
+	}
+	cout << endl;
+	return 0;
 }
 
 

@@ -23,7 +23,7 @@ Basic_products::Basic_products(bool x, string ul, const data_frame &data)
 		deque<double> libor = getnav("LIBOR 3M USD", data);
 		for (size_t i = 1; i < nav_ul.size(); i++)
 		{
-			_nav.push_back(_nav[i - 1] * exp(libor[i]));
+			_nav.push_back(_nav[i - 1] * exp(libor[i]/360.0));
 		}
 		_delta = calculate_delta(_nav, ul, data);
 		_gamma = calculate_gamma(_nav, ul, data);
