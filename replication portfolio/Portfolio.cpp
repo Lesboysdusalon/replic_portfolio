@@ -4,7 +4,7 @@ using namespace std;
 /*	La classe portfolio contient la nav, l'underlying et les grecques du portefeuille à répliquer 
 	Nous avons choisi de répliquer le portefeuille par ses greeks.*/
 
-Portfolio::Portfolio(deque<double> nav, string ul, data_frame data)
+Portfolio::Portfolio(deque<double> nav, string ul, const data_frame &data)
 {
 	_nav = nav;
 	_ul = ul;

@@ -45,7 +45,7 @@ data_frame::data_frame(deque<string> s,const string& filename)
 		_data.push_back(row);
 	};
 	// Les lignes suivantes permettent de convertir les taux aussitôt l'importation faite
-	deque<double> libor = converter_to_continuously_compounded_rate(this->getnav("LIBOR 3M USD"));
+	deque<double> libor = converter_to_continuously_compounded_rate(_data[1]);
 	_data[1] = libor; // RQ : toujours faire attention à placer le taux LIBOR en seconde position du fichier csv, sinon l'indice est à changer
 	// Les instructions suivantes permettent d'exprimer la volatilité comme un nombre plutôt qu'un pourcentage, ce qui n'est pas le cas initialement.
 	deque<double> vol;
@@ -66,29 +66,8 @@ data_frame::~data_frame()
 {
 }
 
-//	Cette fonction très utile permet de récupérer une des séries de données du data_frame à partir de son étiquette
-deque<double> data_frame::getnav(string s)
-{
-	int k = distance(_label.begin(), find(_label.begin(), _label.end(), s)); // Cela permet de récupérer l'indice de la variable recherchée
-	try
-	{
-		if (k == _label.size())
-		{
-			throw 1;
-		}
-		else
-		{
-			deque<double> res = _data[k];
-			return res;
-		}
-	}
-	catch (int e)
-	{
-		cout << "getnav n'a pas trouve le label recherche" << e << endl;
-	}
-}
 
-void data_frame::include_financial_product(Financial_product a, string name)
+void data_frame::include_financial_product(const Financial_product &a, string name)
 {
 	_data.push_back(a._nav);
 	_data.push_back(a._delta);
@@ -105,4 +84,25 @@ void data_frame::include_financial_product(Financial_product a, string name)
 }
 
 
+//	Cette fonction très utile permet de récupérer une des séries de données du data_frame à partir de son étiquette
+deque<double> getnav(string s, const data_frame &d)
+{
+	int k = distance(d._label.begin(), find(d._label.begin(), d._label.end(), s)); // Cela permet de récupérer l'indice de la variable recherchée
+	try
+	{
+		if (k == d._label.size())
+		{
+			throw 1;
+		}
+		else
+		{
+			deque<double> res = d._data[k];
+			return res;
+		}
+	}
+	catch (int e)
+	{
+		cout << "getnav n'a pas trouve le label recherche" << e << endl;
+	}
+}
 

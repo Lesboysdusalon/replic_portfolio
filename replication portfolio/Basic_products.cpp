@@ -1,13 +1,13 @@
 #include "Basic_products.h"
 
-/*	Basic_products contient la nav du sous-jacent et le taux d'intérêt sans risque.*/
+/*	Basic_products contient toutes les informations sur le sous jacent et le Risk Free Asset, défini comme des Financial_Products*/
 
-Basic_products::Basic_products(bool x, string ul, data_frame data)
+Basic_products::Basic_products(bool x, string ul, const data_frame &data)
 {
 	_ul = ul;
 	if (x) // Définition du sous jacent comme Financial_product
 	{
-		_nav = data.getnav(ul);
+		_nav = getnav(ul, data);
 		deque<double> delta(_nav.size(), 1);
 		_delta = delta;
 		deque<double> gamma(_nav.size(), 0);
@@ -18,9 +18,9 @@ Basic_products::Basic_products(bool x, string ul, data_frame data)
 	}
 	else // Définition du risk free asset comme Financial_product
 	{
-		deque<double> nav_ul = data.getnav(ul);
+		deque<double> nav_ul = getnav(ul, data);
 		_nav.push_back(1); // On suppose l'investissement initial égal à 1.
-		deque<double> libor = data.getnav("LIBOR 3M USD");
+		deque<double> libor = getnav("LIBOR 3M USD", data);
 		for (size_t i = 1; i < nav_ul.size(); i++)
 		{
 			_nav.push_back(_nav[i - 1] * exp(libor[i]));
