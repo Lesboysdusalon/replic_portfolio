@@ -18,3 +18,4 @@ checker les begin/end problèmes d'indices dans Vanilla_product.cpp
 
 Problème de pricing des options
 
+A écrire dans le readme final, dans une partie du genre "notes générales sur la prog" : à chaque fois qu'une instance d'une classe défini dans le projet est passée en argument d'une fonction, cela est fait par référence constante de manière à optimiser les temps de calculs.

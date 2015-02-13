@@ -13,12 +13,12 @@ using namespace std;
 //	taux d'escompte des valeurs aux bornes pour le revalue_ul[i]e.
 
 //	Pricing CALL
-deque<double> nav_call(string ul, int maturity, int order, double strike, data_frame data)
+deque<double> nav_call(string ul, int maturity, int order, double strike, const data_frame &data)
 {
 	deque<double> value_call;
-	deque<double> value_ul = data.getnav(ul);
-	deque<double> libor = data.getnav("LIBOR 3M USD");
-	deque<double> vol = data.getnav("vol_"+ul);  // On utilise le VIX comme volatilité implicite du S&P 500
+	deque<double> value_ul = getnav(ul, data);
+	deque<double> libor = getnav("LIBOR 3M USD", data);
+	deque<double> vol = getnav("vol_"+ul, data);  // On utilise le VIX comme volatilité implicite du S&P 500
 	deque<double> d1;
 	deque<double> d2;
 	int low_border = max(order, 0);
@@ -44,12 +44,12 @@ deque<double> nav_call(string ul, int maturity, int order, double strike, data_f
 	return value_call;
 }
 //	Pricing PUT
-deque<double> nav_put(string ul, int maturity, int order, double strike, data_frame data)
+deque<double> nav_put(string ul, int maturity, int order, double strike, const data_frame &data)
 {
 	deque<double> value_put;
-	deque<double> value_ul = data.getnav(ul);
-	deque<double> libor = data.getnav("LIBOR 3M USD");
-	deque<double> vol = data.getnav("vol_"+ul); 
+	deque<double> value_ul = getnav(ul, data);
+	deque<double> libor = getnav("LIBOR 3M USD", data);
+	deque<double> vol = getnav("vol_"+ul, data); 
 	deque<double> d1;
 	deque<double> d2;
 	for (size_t i = 0; i < value_ul.size(); i++)
@@ -74,7 +74,7 @@ deque<double> nav_put(string ul, int maturity, int order, double strike, data_fr
 }
 
 //	Définition de l'Option par sa nav, son under-lying et ses greeks
-Option::Option(string ul, int maturity, int order, double strike, string type, data_frame data)
+Option::Option(string ul, int maturity, int order, double strike, string type, const data_frame &data)
 {
 	_nav = type=="call" ? nav_call(ul, maturity, order, strike, data) : nav_put(ul, maturity, order, strike, data);
 	_ul = ul;

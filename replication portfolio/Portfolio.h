@@ -9,7 +9,7 @@ using namespace std;
 class Portfolio : public Financial_product
 {
 public:
-	Portfolio(deque<double>, string, data_frame);
+	Portfolio(deque<double>, string, const data_frame &data);
 	Portfolio();
 	~Portfolio();
 };

@@ -8,7 +8,7 @@
 	La base de données ainsi construite contiendra un ensemble d'options vanilles, mais aussi le sous jacent et un actif sans risque */
 
 
-Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> order, deque<double> strike, deque<string> type, data_frame data)
+Vanilla_Products::Vanilla_Products(string ul, deque<int> maturity, deque<int> order, deque<double> strike, deque<string> type, const data_frame &data)
 {
 	_ul = ul;
 	_maturity = maturity;

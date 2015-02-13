@@ -12,10 +12,10 @@
 //	cela ne pose pas de problème dans la régression puisque elle sera effectuée à partir de la date 2.
 
 //	Calcul de Delta
-deque<double> calculate_delta(deque<double> nav, string ul, data_frame data)
+deque<double> calculate_delta(deque<double> nav, string ul, const data_frame &data)
 {
 	deque<double> delta;
-	deque<double> value_ul = data.getnav(ul);
+	deque<double> value_ul = getnav(ul, data);
 	delta.push_back(0); 
 	for (size_t i = 1; i < nav.size(); i++)
 	{ 
@@ -25,10 +25,10 @@ deque<double> calculate_delta(deque<double> nav, string ul, data_frame data)
 }
 
 //	Calcul de Gamma
-deque<double> calculate_gamma(deque<double> nav, string ul, data_frame data)
+deque<double> calculate_gamma(deque<double> nav, string ul, const data_frame &data)
 {
 	deque<double> gamma;
-	deque<double> value_ul = data.getnav(ul);
+	deque<double> value_ul = getnav(ul, data);
 	deque<double> delta = calculate_delta(nav, ul, data);
 	gamma.push_back(0);
 	for (size_t i = 1; i < nav.size(); i++)
@@ -39,10 +39,10 @@ deque<double> calculate_gamma(deque<double> nav, string ul, data_frame data)
 }
 
 //	Calcul de Vega
-deque<double> calculate_vega(deque<double> nav, string ul, data_frame data)
+deque<double> calculate_vega(deque<double> nav, string ul, const data_frame &data)
 {
 	deque<double> vega;
-	deque<double> vol = data.getnav("vol_"+ul);
+	deque<double> vol = getnav("vol_"+ul, data);
 	vega.push_back(0);
 	for (size_t i = 1; i < nav.size(); i++)
 	{
@@ -52,10 +52,10 @@ deque<double> calculate_vega(deque<double> nav, string ul, data_frame data)
 }
 
 //	Calcul de Rho
-deque<double> calculate_rho(deque<double> nav, data_frame data)
+deque<double> calculate_rho(deque<double> nav, const data_frame &data)
 {
 	deque<double> rho;
-	deque<double> value_r = data.getnav("LIBOR 3M USD");
+	deque<double> value_r = getnav("LIBOR 3M USD", data);
 	rho.push_back(0);
 	for (size_t i = 1; i < nav.size(); i++)
 	{
@@ -65,7 +65,7 @@ deque<double> calculate_rho(deque<double> nav, data_frame data)
 }
 
 //	Calcul de Theta
-deque<double> calculate_theta(deque<double> nav, data_frame data)
+deque<double> calculate_theta(deque<double> nav, const data_frame &data)
 {
 	deque<double> theta;
 	theta.push_back(0);

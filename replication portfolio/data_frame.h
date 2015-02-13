@@ -21,9 +21,9 @@ public:
 	data_frame(deque<string>,const string&); // Ce constructeur permet de spécifier uniquement les labels et le chemin d'accès du fichier csv pour importer les données via les méthodes définies dans underlyings.h.
 	data_frame();
 	~data_frame();
-	deque<double> getnav(string); // Cette méthode permet d'accéder à une des collonnes de données de _data via le label correspondant
-	void include_financial_product(Financial_product, string); // Cette méthode permet de rajouter un produit financier à un data_frame
+	void include_financial_product(const Financial_product& , string); // Cette méthode permet de rajouter un produit financier à un data_frame
 };
 
 int search_st(deque<string>, string);
 deque<double> converter_to_continuously_compounded_rate(deque<double>);
+deque<double> getnav(string, const data_frame &); // Cette fonction permet d'accéder à une des collonnes de données de _data via le label correspondant

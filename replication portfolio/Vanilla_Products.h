@@ -15,7 +15,7 @@ public:
 	deque<int> _order;
 	deque<double> _strike;
 	deque<string> _type;
-	Vanilla_Products(string ul, deque<int> maturity, deque<int> order, deque<double> strike, deque<string> type, data_frame data);
+	Vanilla_Products(string ul, deque<int> maturity, deque<int> order, deque<double> strike, deque<string> type, const data_frame &data);
 	Vanilla_Products();
 	~Vanilla_Products();
 };
