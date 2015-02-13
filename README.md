@@ -141,6 +141,11 @@ Après ces modifications, l'algorithme tourne en quelques secondes.
 
 ## Critique des résultats
 
-
-
-
+Le programme génère une exception et l'exécution ne se termine donc pas.
+L'erreur vient de la régression linéaire effectuée par une fonction de la librairie externe. 
+Pourtant nous avons étudié en précision le fonctionnement de la librairie et nous n'avons pas compris l'origine de l'erreur.
+La matrice de régression semble conforme à la structure demandée en argument.
+Nous pensons que le problème vient du fait que l'importation et l'intégration de la librairie ont été mal effectuées, pourtant il n'y a aucune erreur de compilation.
+Nous avons donc essayé de réintégrer la librairie d'une nouvelle manière sans succès.
+L'exception générée n'est pas gérée par la librairie, et il n'y a aucun message d'erreur explicite.
+Nous avons vérifié tout les résultats intermédiaires qui sont tout à fait cohérents, en particulier concernant le pricing d'options. Nous avons aussi laissé un Breakpoint juste avant la génération de l'exception.
