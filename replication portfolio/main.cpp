@@ -30,7 +30,7 @@ int main()
 	// Création de la base de produits vanilles
 	deque<int> maturity = { 300 };
 	deque<int> order = { 0 }; // ATTENTION : par souci de cohérence, order est nécessairement toujours inférieur à maturity
-	deque<double> strike = { 1200.0 };
+	deque<double> strike = { 1200.0, 1500.0, 1000.0 };
 	deque<string> type = { "call","put" };
 	Vanilla_Products van("sp", maturity, order, strike, type, data);
 
@@ -52,6 +52,7 @@ int main()
 	alglib::ae_int_t nb_vars = mat.cols() - 1;
 
 	// Regression linéaire
+
 	alglib::linearmodel result;
 	alglib::ae_int_t info;
 	alglib::lrreport ar;
@@ -62,7 +63,7 @@ int main()
 	alglib::lrunpack(result, coef, nb_vars);
 	for (alglib::ae_int_t i = 0; i < coef.length(); i++)
 	{
-		cout << label[i]+" : " << coef[i] << endl;
+		cout << label[i]+ " : " << coef[i] << endl;
 	}
 	cout << endl;
 	return 0;
