@@ -1,11 +1,6 @@
 #include "data_frame.h"
 using namespace std;
 
-/*	Ce fichier permet la création d'un data_frame.
-	Le data_frame sera ensuite rempli avec les nav et grecques des Vanilla_Products et des Basic_Products.
-	La base ainsi formée sera utilisés pour la régression.
-	La classe data frame permet d'accéder facilement aux données via leur label. */
-
 
 data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 {
@@ -15,7 +10,7 @@ data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 
 //	Cette fonction permet de convertir un vecteur de taux quaterly compounded en un vecteur de taux continuously compounded
 //	Le taux d'intérêt est également annualisé. Cela nous perment d'utiliser la formule de Black-Scholes
-//	A partir de maintenant, le taux utilisé sera le taux libor continuously compounded
+//	A partir de maintenant, le taux utilisé sera le taux libor continuously compounded annualisé
 deque<double> converter_to_continuously_compounded_rate(deque<double> rate)
 {
 	deque<double> continuously_compounded_rate;

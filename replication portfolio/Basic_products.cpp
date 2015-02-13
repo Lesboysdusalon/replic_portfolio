@@ -1,6 +1,5 @@
 #include "Basic_products.h"
 
-/*	Basic_products contient toutes les informations sur le sous jacent et le Risk Free Asset, défini comme des Financial_Products*/
 
 Basic_products::Basic_products(bool x, string ul, const data_frame &data)
 {

@@ -4,9 +4,9 @@
 #include "data_frame.h"
 using namespace std;
 
-/*	Calcul des grecques pour la réplication par les grecques.
-	Les fonctions de calcul de grecques ont pour argument le vecteur de valeur du produit, et en fonction des cas, le sous jacent 
-	ou la maturité.*/
+/*	Calcul des grecques pour la réplication.
+	Les fonctions de calcul de grecques ont pour argument le vecteur de valeur du produit, et en fonction des cas, le sous-jacent 
+	ou la maturité, ainsi que le data_frame contenant les données.*/
 
 deque<double> calculate_delta(deque<double> nav, string ul, const data_frame &data);
 deque<double> calculate_gamma(deque<double> nav, string ul, const data_frame &data);

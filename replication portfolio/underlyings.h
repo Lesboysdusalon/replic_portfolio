@@ -7,7 +7,7 @@
 using namespace std;
 
 /*	Création de la structure data_t, elle va permettre de stocker les données
-	Deque est plus adapté que deque en raison de la taille de la base de données*/
+	Deque est plus adapté que vector en raison de la taille de la base de données*/
 
 struct data_t : deque < deque <double> >
 {

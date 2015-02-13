@@ -1,11 +1,8 @@
 #include "reg_matrix.h"
 
-/*	On construit ici la matrice de régression linéaire sur les grecques.*/
-
-
-// Cette fonction permet d'importer un produit financier d'un data_frame à uen matrice de regression.
-// Bien que les deux classes soient construites de la même façon, les données n'y seront pas présentes selon la même organisation : dans le data_frame 
-// on trouvera toutes les greecques du produit séparées dans des colonnes différentes, alors que dans reg_matrix elles seront mises bout à bout puisque 
+// Cette méthode permet de rajouter un produit dont les données sont présentes dans le data_frame en argument dans la matrice de regression.
+// Bien que les deux classes soient des data_frame, les données n'y seront pas présentes selon la même organisation : dans le data_frame en argument 
+// on trouvera toutes les grecques du produit séparées dans des colonnes différentes, alors que dans reg_matrix elles seront mises bout à bout puisque 
 // différentes grecques représentent différentes observations.
 void reg_matrix::add_product(const data_frame &d, string product_name, int begin, int end)
 {
@@ -26,10 +23,10 @@ void reg_matrix::add_product(const data_frame &d, string product_name, int begin
 reg_matrix::reg_matrix(const Portfolio &port, const Vanilla_Products &vanilla, int begin, int end)
 {
 	Vanilla_Products local_data = vanilla; 
-	// On copie les données dans un nouveau data_frame pour expliciter la non modification de vanilla
+	// On copie les données dans un nouveau data_frame local
 	// Cette copie ne pose pas de problème au niveau de la complexité algorithmique puisqu'elle n'est exécutée qu'une seule fois dans le programme
 	local_data.include_financial_product(port,"Portfolio"); // On rajoute le Portfolio au données locales
-	// La suite des instructions permettent de rajouter les produits de local_data dans le data_frame construit ici
+	// La suite des instructions permettent de rajouter les produits de local_data dans l'objet construit ici
 	this->add_product(local_data, local_data._ul, begin, end);
 	this->add_product(local_data, "Risk free asset", begin, end);
 	for (size_t o = 0; o < local_data._order.size(); o++)
@@ -60,10 +57,10 @@ reg_matrix::~reg_matrix()
 {
 }
 
-// Cette fonction permet de convertir des données sous forme de real_2d_array, donc de passer d'une structure de donnée dynamique
+// Cette fonction permet de convertir les données sous forme de real_2d_array, donc de passer d'une structure de données dynamique
 // adaptée à la construction des données à une structure de données statique adaptée à l'utilisation de celles ci.
-// Avant d'effectuer cette convertion on élimine toutes les valeurs de type INF ou IND issues des calculs des greecques.
-// En effet, le LIBOR étant souvent constant d'un jour à l'autre, de nombreuse valeur de rho n'ont pas de sens, il faut donc les supprimer
+// Avant d'effectuer cette conversion on élimine toutes les valeurs de type INF ou IND issues des calculs des greecques.
+// En effet, le LIBOR étant souvent constant d'un jour à l'autre, de nombreuse valeur de rho n'ont pas de sens, il faut donc les supprimer.
 
 alglib::real_2d_array convert_matrix(const deque<deque<double> > &d)
 {

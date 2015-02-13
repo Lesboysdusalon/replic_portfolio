@@ -1,16 +1,10 @@
 #include "Option.h"
 using namespace std;
 
-/*	Les Options sont un des Financial_products utilisés pour la régression sur les greeks.
-	Chaque Option est définie par la nav d'un sous-jacent, une maturité, une date de passage de l'ordre et un strike.
-	Dans ce fichier, on effectue le Pricing des options et le calcul de ses greeks.
-	Cela permet de définir une Option uniquement par sa nav et ses greeks.*/
-
-
 //	Pricing d'Option
-//	Nav d'un call d'option (puis d'un put) de ul, maturité, strike donnés dont l'ordre evalue_ul[i] est passé à la date order
+//	Nav d'un call d'option (puis d'un put) calculée à partir des paramètres suivants : ul, maturité, strike, date de l'ordre
 //	Le calcul de sa valeur se fait par formule de Black Scholes entre la date order et la maturité, et par actualisation par 
-//	taux d'escompte des valeurs aux bornes pour le revalue_ul[i]e.
+//	taux d'escompte des valeurs aux bornes pour le reste.
 
 //	Pricing CALL
 deque<double> nav_call(string ul, int maturity, int order, double strike, const data_frame &data)
@@ -45,6 +39,7 @@ deque<double> nav_call(string ul, int maturity, int order, double strike, const 
 	}
 	return value_call;
 }
+
 //	Pricing PUT
 deque<double> nav_put(string ul, int maturity, int order, double strike, const data_frame &data)
 {
@@ -84,9 +79,9 @@ Option::Option(string ul, int maturity, int order, double strike, string type, c
 {
 	_nav = type=="call" ? nav_call(ul, maturity, order, strike, data) : nav_put(ul, maturity, order, strike, data);
 	_ul = ul;
-	_delta = calculate_delta(_nav, ul, data);  
 //	Il est discutable de calculer les greeks de cette façon, il aurait aussi été possible de le faire en utilisant 
-//	les formules analytiques dérivées de la formule de procing de Black Scholes.
+//	les formules analytiques dérivées de la formule de pricing de Black Scholes.
+	_delta = calculate_delta(_nav, ul, data);
 	_gamma = calculate_gamma(_nav, ul, data);
 	_vega = calculate_vega(_nav, ul, data);
 	_rho = calculate_rho(_nav, data);

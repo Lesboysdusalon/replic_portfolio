@@ -3,14 +3,16 @@
 #include "Basic_products.h"
 using namespace std;
 
-/*	La classe Vanilla_products est de permettre de créer un data_frame contenant toute les données de notre base de produits vanilles, 
+/*	La classe Vanilla_products est de permettre de créer un data_frame contenant toutes les données de notre base de produits vanilles, 
 	sur la quelle nous allons effectuer la regression. 
-	Elle sera composée d'options (issues de la classe Option), du sous jacent lui même et du risk free asset (issus de la clase Basic_products).*/
+	Elle sera composée d'options, du sous jacent lui même et du risk free asset (issus de la clase Basic_products).*/
 
-class Vanilla_Products : public data_frame // La classe Vanilla_product est construite à partir de la classe data_frame, on défini uniquement un constructeur supplémentaire
+class Vanilla_Products : public data_frame // La classe Vanilla_product est construite à partir de la classe data_frame.
 {
-public:
-	string _ul;  // Les nouveaux membres de cette classe correspondent aux arguments du constructeur, il est important de les stocker comme membre de la classe pour faciliter la réorganisation des données dans reg_matrix
+public: 
+	// Les nouveaux membres de cette classe correspondent aux arguments du constructeur, il est important de les stocker comme membre de la classe 
+	//	pour faciliter la réorganisation des données dans reg_matrix
+	string _ul;
 	deque<int> _maturity;
 	deque<int> _order;
 	deque<double> _strike;
