@@ -14,12 +14,12 @@ data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 }
 
 //	Cette fonction permet de convertir un vecteur de taux quaterly compounded en un vecteur de taux continuously compounded
-//	Cela nous perment d'utiliser la formule de Black-Scholes
+//	Le taux d'intérêt est également annualisé. Cela nous perment d'utiliser la formule de Black-Scholes
 //	A partir de maintenant, le taux utilisé sera le taux libor continuously compounded
 deque<double> converter_to_continuously_compounded_rate(deque<double> rate)
 {
 	deque<double> continuously_compounded_rate;
-	double m = 360 / 91;
+	double m = 360  / 91;
 	for (size_t i = 0; i < rate.size(); i++)
 	{
 		continuously_compounded_rate.push_back(m*log(1 + rate[i] / m));
