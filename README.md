@@ -13,9 +13,9 @@ Chaque portefeuille Répliqué peut être caractérisé par :
 L'objectif est de créer un portefeuille Réplicant ayant les mêmes grecques que le portefeuille répliqué.
 Ce portefeuille Répliquant contient exclusivement des produits vanilles : options vanilles, le sous-jacent et l'actif sans risque.
 Les produits vanilles sont chacun étant caractérisé par :
-** son sous-jacent
-** sa nav, calculé en effectuant un pricing d'option
-** ses grecques, utilisées ensuite pour la régression
+* son sous-jacent
+* sa nav, calculé en effectuant un pricing d'option
+* ses grecques, utilisées ensuite pour la régression
 
 
 ## Cadre et Approximations
@@ -38,11 +38,11 @@ Cette base de donnée est ensuite importée sous Visual Studio et convertie en u
 
 ## Financial_Product
 
-Financial_Product est la classe mère de tous les produits financiers utilisés dans la régression. Les classes Basic_Product, Option et Portfolio héritent de Financial_Product.
+Financial_Product est la classe mère de tous les produits financiers utilisés dans la régression. Les classes Basic_products, Option et Portfolio héritent de Financial_Product.
 Nous nous sommes attachés tout au long de ce projet à coder de la manière la plus propre qui soit, ainsi la structure du code est conçue pour pouvoir accueillir de nouveaux produits.
 Chaque produit financier est défini par sa nav et par ses grecques.
 
-### Basic_Product
+### Basic_products
 Cette classe regroupe :
 * le sous-jacent
 * l'actif sans risque
@@ -85,7 +85,7 @@ Elle est définie de façon usuelle. Chaque deque a une étiquette, ce qui perme
 
 ### Vanilla_product
 Le data_frame Vanilla_product regroupe l'ensemble des données relatives aux produits financiers utilisés comme variables explicatives dans la régression.
-Chaque colonne de Vanilla_product correspond à une Option ou à un Basic_Product. Il peut s'agir de la nav du produit ou d'un de ses grecques.
+Chaque colonne de Vanilla_product correspond à une Option ou à un Basic_products. Il peut s'agir de la nav du produit ou d'un de ses grecques.
 Pour les Options, les labels des colonnes sont normalisés de la forme suivante :
 S&P500_call_maturity_31_order_12_strike_1200_delta. 
 La colonne ayant ce label contient les valeurs journalières du Delta d'un Call de maturité 31 jours de strike 1200$ dont l'ordre d'achat a été passé au 12e jour de la base de données soit mi-janvier 2000.
