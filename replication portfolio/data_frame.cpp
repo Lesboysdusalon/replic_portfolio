@@ -1,6 +1,11 @@
 #include "data_frame.h"
 using namespace std;
 
+/*	Ce fichier permet la création d'un data_frame.
+	Le data_frame sera ensuite rempli avec les nav et grecques des Vanilla_Products et des Basic_Products.
+	La base ainsi formée sera utilisés pour la régression.
+	La classe data frame permet d'accéder facilement aux données via leur label. */
+
 
 data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 {
@@ -8,9 +13,9 @@ data_frame::data_frame(deque<string> s, deque<deque<double> > v)
 	_data = v;
 }
 
-// Cette fonction permet de convertir un vecteur de taux quaterly compounded en un vecteur de taux continuously compounded
-// Cela nous perment d'utiliser la formule de Black-Scholes
-// A partir de maintenant, le taux utilisé sera le taux libor continuously compounded
+//	Cette fonction permet de convertir un vecteur de taux quaterly compounded en un vecteur de taux continuously compounded
+//	Cela nous perment d'utiliser la formule de Black-Scholes
+//	A partir de maintenant, le taux utilisé sera le taux libor continuously compounded
 deque<double> converter_to_continuously_compounded_rate(deque<double> rate)
 {
 	deque<double> continuously_compounded_rate;
@@ -23,7 +28,7 @@ deque<double> converter_to_continuously_compounded_rate(deque<double> rate)
 }
 
 
-// Ici est déifini le constructeur de data_frame qui nous permettra de creer la base de données data.
+//	Ici est déifini le constructeur de data_frame qui nous permettra de creer la base de données data.
 data_frame::data_frame(deque<string> s,const string& filename)
 {
 	_label = s;
@@ -61,8 +66,8 @@ data_frame::~data_frame()
 {
 }
 
-
-deque<double> data_frame::getnav(string s)  // Cette fonction très utile permet de récupérer une des séries de données du data_frame à partir de son étiquette
+//	Cette fonction très utile permet de récupérer une des séries de données du data_frame à partir de son étiquette
+deque<double> data_frame::getnav(string s)
 {
 	int k = distance(_label.begin(), find(_label.begin(), _label.end(), s)); // Cela permet de récupérer l'indice de la variable recherchée
 	try

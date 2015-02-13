@@ -1,10 +1,11 @@
 #pragma once
 #include "Option.h"
 #include "Basic_products.h"
-
 using namespace std;
 
-// L'usage de la classe Vanilla_products est de permettre de créer un data_frame contenant toute les données de notre base de produits vanilles, sur la quelle nous allons effectuer la regression. Elle sera composée d'options (issues de la classe option), du sous jacent lui même et du risk free asset (issus de la clase financial_products)
+/*	La classe Vanilla_products est de permettre de créer un data_frame contenant toute les données de notre base de produits vanilles, 
+	sur la quelle nous allons effectuer la regression. 
+	Elle sera composée d'options (issues de la classe Option), du sous jacent lui même et du risk free asset (issus de la clase Basic_products).*/
 
 class Vanilla_Products : public data_frame // La classe Vanilla_product est construite à partir de la classe data_frame, on défini uniquement un constructeur supplémentaire
 {

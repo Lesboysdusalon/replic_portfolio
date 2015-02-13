@@ -1,5 +1,7 @@
 #include "Basic_products.h"
 
+/*	Basic_products contient la nav du sous-jacent et le taux d'intérêt sans risque.*/
+
 Basic_products::Basic_products(bool x, string ul, data_frame data)
 {
 	_ul = ul;

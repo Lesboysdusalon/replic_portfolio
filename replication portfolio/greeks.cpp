@@ -1,8 +1,17 @@
 #include "greeks.h"
 
-// On approxime la dérivée par un taux d'accroissement
-// par convention, on prend la première valeur nulle, 
-// cela ne pose pas de problème dans la régression puisque elle sera effectuée à partir de la date 2.
+/*	Nous avons choisi de répliquer le portefeuille par ses greeks.
+	Ces fonctions permettent de calculer les différents greeks.
+	Elles seront ensuite utilisées pour calculer les greeks du portefeuille et des différents produits financiers utilisés
+	dans la régression*/
+
+
+
+//	On approxime la dérivée par un taux d'accroissement
+//	par convention, on prend la première valeur nulle, 
+//	cela ne pose pas de problème dans la régression puisque elle sera effectuée à partir de la date 2.
+
+//	Calcul de Delta
 deque<double> calculate_delta(deque<double> nav, string ul, data_frame data)
 {
 	deque<double> delta;
@@ -15,6 +24,7 @@ deque<double> calculate_delta(deque<double> nav, string ul, data_frame data)
 	return delta;
 }
 
+//	Calcul de Gamma
 deque<double> calculate_gamma(deque<double> nav, string ul, data_frame data)
 {
 	deque<double> gamma;
@@ -28,6 +38,7 @@ deque<double> calculate_gamma(deque<double> nav, string ul, data_frame data)
 	return gamma;
 }
 
+//	Calcul de Vega
 deque<double> calculate_vega(deque<double> nav, string ul, data_frame data)
 {
 	deque<double> vega;
@@ -40,6 +51,7 @@ deque<double> calculate_vega(deque<double> nav, string ul, data_frame data)
 	return vega;
 }
 
+//	Calcul de Rho
 deque<double> calculate_rho(deque<double> nav, data_frame data)
 {
 	deque<double> rho;
@@ -52,6 +64,7 @@ deque<double> calculate_rho(deque<double> nav, data_frame data)
 	return rho;
 }
 
+//	Calcul de Theta
 deque<double> calculate_theta(deque<double> nav, data_frame data)
 {
 	deque<double> theta;

@@ -4,11 +4,16 @@
 #include "Portfolio.h"
 #include <specialfunctions.h>
 #include "Financial_product.h"
-
 using namespace std;
 
-// De même que la classe Portfolio, les Options sont définies par leur nav, le sous jacent, la maturité et les grecques, ainsi les classes sont de même type.
-// Cependant le constructeur est différent, puisque cette fois on calcule la nav en fonction des paramètres de l'option, par des formules de pricing de Black Scholes.
+/*	Les Options sont un des Financial_products utilisés pour la régression sur les greeks.
+	De même que Basic_product et Portfolio, Option sert à construire les produits financiers. A ne pas confondre avec Vanilla_products
+	qui sert à stocker toutes les données dans un data_frame.
+	De même que la classe Portfolio, les Options sont définies par leur nav, le sous jacent, la maturité et les grecques, 
+	ainsi les classes sont de même type.
+	Cependant le constructeur est différent, puisque cette fois on calcule la nav en fonction des paramètres de l'option, 
+	par des formules de pricing de Black Scholes. */
+
 
 class Option : public Financial_product
 {

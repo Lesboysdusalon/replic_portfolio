@@ -2,11 +2,15 @@
 #include <iostream>
 #include <algorithm>
 #include "underlyings.h"
-#include "Financial_product.h" // RQ : cette instruction a pour conséquence une boucle d'inclusion dans les fichiers, ce qui peut menner à un problème au niveau de la compréhension du code, mais cela permet de simplifier certaines fonctions.
+#include "Financial_product.h" 
+//	RQ : cette instruction a pour conséquence une boucle d'inclusion dans les fichiers, ce qui peut menner à un problème 
+//	au niveau de la compréhension du code, mais cela permet de simplifier certaines fonctions.
 using namespace std;
 
-// Définition de la classe Data Frame, de la même façon que sur R, 
-// Cela nous sert à stocker les données d'underlyings entres autres
+/*	Définition de la classe Data Frame, de la même façon que sur R, 
+	Cette classe nous servira à stocker les données utilisées plus tard dans la régression.
+	Entres autres les grecques des produits financiers utilisés pour la régression sur les grecques.*/
+
 
 class data_frame
 {

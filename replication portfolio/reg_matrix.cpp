@@ -1,8 +1,12 @@
 #include "reg_matrix.h"
 
+/*	On construit ici la matrice de régression linéaire sur les grecques.*/
+
 
 // Cette fonction permet d'importer un produit financier d'un data_frame à uen matrice de regression.
-// Bien que les deux classes soient construites de la même façon, les données n'y seront pas présentes selon la même organisation : dans le data_frame on trouvera toutes les greecques du produit séparées dans des colonnes différentes, alors que dans reg_matrix elles seront mises bout à bout puisque différentes grecques représentent différentes observations
+// Bien que les deux classes soient construites de la même façon, les données n'y seront pas présentes selon la même organisation : dans le data_frame 
+// on trouvera toutes les greecques du produit séparées dans des colonnes différentes, alors que dans reg_matrix elles seront mises bout à bout puisque 
+// différentes grecques représentent différentes observations.
 void reg_matrix::add_product(data_frame d, string product_name, int begin, int end)
 {
 	deque<double> vect;
@@ -19,11 +23,11 @@ void reg_matrix::add_product(data_frame d, string product_name, int begin, int e
 	_label.push_back(product_name);
 }
 
-
-
 reg_matrix::reg_matrix(Portfolio port, Vanilla_Products vanilla, int begin, int end)
 {
-	Vanilla_Products local_data = vanilla; // On copie les données dans un nouveau data_frame pour expliciter la non modification de vanilla, au niveau machine cela n'est pas nécessaire puisque l'argument vanilla n'est pas passé en référence.
+	Vanilla_Products local_data = vanilla; 
+	// On copie les données dans un nouveau data_frame pour expliciter la non modification de vanilla, au niveau machine cela n'est pas nécessaire 
+	// puisque l'argument vanilla n'est pas passé en référence.
 	local_data.include_financial_product(port,"Portfolio"); // On rajoute le Portfolio au données locales
 	// La suite des instructions permettent de rajouter les produits de local_data dans le data_frame construit ici
 	this->add_product(local_data, local_data._ul, begin, end);
@@ -43,7 +47,9 @@ reg_matrix::reg_matrix(Portfolio port, Vanilla_Products vanilla, int begin, int 
 			}
 		}
 	}
-	this->add_product(local_data, "Portfolio", begin, end); // On rajoute le Portfolio à la fin car la librairie de régression linéraire implique que la variable à expliquer soit la dernière colonne de la matrice
+	this->add_product(local_data, "Portfolio", begin, end); 
+	// On rajoute le Portfolio à la fin car la librairie de régression linéraire implique que la variable à expliquer soit la dernière colonne 
+	// de la matrice
 }
 
 reg_matrix::reg_matrix()

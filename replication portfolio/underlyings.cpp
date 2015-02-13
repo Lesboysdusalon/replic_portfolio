@@ -2,13 +2,11 @@
 #include "underlyings.h"
 using namespace std;
 
-// Le code de se fichier est issu de la source suivante : http://www.cplusplus.com/forum/beginner/10756/
-// Il permet d'importer des fichiers CSV.
-
 /*	Les données concernant le cours historique des underlyings est téléchargée via
 	le site Yahoofinance sous format CSV. 
-	Il faut donc importer les données sous C++ sous la forme d'une matrice.*/
-// -------------------------------------------------------------------------------
+	Il faut donc importer les données sous C++ sous la forme d'une matrice.
+	Le code de se fichier est issu de la source suivante : http://www.cplusplus.com/forum/beginner/10756/
+	Il permet d'importer des fichiers CSV.*/
 
 
 // conversion du format csv en matrice

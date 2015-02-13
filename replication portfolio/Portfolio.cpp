@@ -1,6 +1,9 @@
 #include "Portfolio.h"
 using namespace std;
 
+/*	La classe portfolio contient la nav, l'under-lying et les grecques du portefeuille à répliquer 
+	Nous avons choisi de répliquer le portefeuille par ses greeks.*/
+
 Portfolio::Portfolio(deque<double> nav, string ul, data_frame data)
 {
 	_nav = nav;
